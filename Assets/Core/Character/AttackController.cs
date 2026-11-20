@@ -7,7 +7,8 @@ namespace Core.Character
 {
     public class AttackController : MonoBehaviour
     {
-        public Transform attackSourceTransform;
+        public AudioSource sour; 
+        public Transform attackSourceTransform; 
         public Transform attackTargetTransform;
         public float cooldown = 0.4f;
         public float attackRadius = 0.8f;
@@ -34,10 +35,13 @@ namespace Core.Character
         // Update is called once per frame
         public bool TryAttack()
         {
-            if (attackCooldown <= 0)
-            {
-                // Add controller support with Right analog stick
-                Vector3 attackDirection = new Vector3(
+        
+
+			if (attackCooldown <= 0)
+			{
+                sour.Play();
+				// Add controller support with Right analog stick
+				Vector3 attackDirection = new Vector3(
                     Input.GetAxisRaw("Horizontal"),
                     Input.GetAxisRaw("Vertical"), 0);
 

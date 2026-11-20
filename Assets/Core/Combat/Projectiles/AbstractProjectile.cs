@@ -12,6 +12,7 @@ namespace Core.Combat.Projectiles
         public AudioClip splatterSound;
         public bool DestroyHit;
 
+        public AudioSource sourc;
         public GameObject Shooter { get; set; }
 
         protected Vector2 force;
@@ -44,7 +45,9 @@ namespace Core.Combat.Projectiles
             {
                 Vector2 force = this.force.normalized;
                 player.Hurt((int)damage, force * 300.0f);
-            }
+                sourc.Play();
+
+			}
         
             if (DestroyHit)
                 DestroyProjectile();

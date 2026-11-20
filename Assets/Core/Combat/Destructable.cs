@@ -15,6 +15,7 @@ namespace Core.Combat
 
         private BehaviorGraphAgent _agent;
 
+
         protected override void Awake()
         {
             base.Awake();
@@ -36,7 +37,7 @@ namespace Core.Combat
 
         public void DealDamage(int damage)
         {
-            CurrentHealth -= damage;
+			CurrentHealth -= damage;
             
             _agent?.BlackboardReference.SetVariableValue("Health", CurrentHealth);
             
@@ -54,7 +55,14 @@ namespace Core.Combat
         {
             CurrentHealth = health;
 
-            _agent?.BlackboardReference.SetVariableValue("Health", CurrentHealth);
+			_agent?.BlackboardReference.SetVariableValue("Health", CurrentHealth);
         }
-    }
+
+		internal void SetEnd(bool end)
+		{
+
+            end = true;
+			_agent?.BlackboardReference.SetVariableValue("End", end);
+		}
+	}
 }

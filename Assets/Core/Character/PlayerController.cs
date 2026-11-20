@@ -9,6 +9,9 @@ namespace Core.Character
     public class PlayerController : MonoBehaviour
     {
         public bool isPlayerControlled = true;
+        public AudioSource source;
+        public AudioSource sourcejUMP;
+        public AudioSource sourceDamage;
 
         public float speed = 100.0f;
         public float accelerationMultiplier = 2.5f;
@@ -271,7 +274,9 @@ namespace Core.Character
         {
             if (dashTimer <= 0 && dashCooldownTimer <= 0 && isDashing && !wasDashing && isOnGround)
             {
-                animator.SetTrigger(CharacterAnimations.Dash);
+                source.Play();
+
+				animator.SetTrigger(CharacterAnimations.Dash);
                 //SoundManager.Instance.PlaySound(dashSound, 0.2f, audioSource, true);
                 dashTimer = dashTime;
                 dashCooldownTimer = dashCooldown;
@@ -381,7 +386,9 @@ namespace Core.Character
             canJump = canJump && isJumping && !wasJumping;
             if (canJump)
             {
-                StartJump();
+                sourcejUMP.Play();
+
+				StartJump();
             }
 
             if (!isOnGround && !isJumping && body.linearVelocity.y > 0.01f)
@@ -486,7 +493,9 @@ namespace Core.Character
 
         public void SetHealth(int hp)
         {
-            PlayerData.HP = hp;
+           // sourceDamage.Play();
+
+			PlayerData.HP = hp;
         }
 
         public void KillPlayer(bool recoil)

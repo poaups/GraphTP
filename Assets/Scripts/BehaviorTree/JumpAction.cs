@@ -7,6 +7,7 @@ using Unity.Behavior;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
 using Unity.Properties;
+using Core;
 
 [Serializable, GeneratePropertyBag]
 [NodeDescription(name: "Jump", story: "Makes the [Agent] jump", category: "Action",
@@ -54,11 +55,11 @@ public partial class JumpAction : Action
 
     private void StartJump(GameObject owner)
     {
-        var direction = Player.Value.transform.position.x < owner.transform.position.x ? -1 : 1;
+		var direction = Player.Value.transform.position.x < owner.transform.position.x ? -1 : 1;
         owner.GetComponent<Rigidbody2D>()
             .AddForce(new Vector2(horizontalForce * direction, jumpForce), ForceMode2D.Impulse);
-
-        jumpTween = DOVirtual.DelayedCall(jumpTime, () =>
+        GameManager.Instance.JumpSong();
+		jumpTween = DOVirtual.DelayedCall(jumpTime, () =>
         {
             hasLanded = true;
             if (shakeCameraOnLanding)

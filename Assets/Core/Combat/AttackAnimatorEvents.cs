@@ -10,6 +10,8 @@ namespace Core.Combat
         public ParticleSystem impactEffect;
         public Transform impactTransform;
         public float cameraShakeIntensity = 0.2f;
+        public AudioSource source;
+        public AudioSource sourceLand;
         
         private void OnAttackStart()
         {
@@ -17,8 +19,18 @@ namespace Core.Combat
             EffectManager.Instance.PlayOneShot(impactEffect, impactTransform.position);
             CameraController.Instance.ShakeCamera(cameraShakeIntensity);
         }
-        
-        private void OnAttackEnd()
+
+        public void SoundAttack()
+        {
+            source.Play();
+
+		}
+		public void Land()
+		{
+			sourceLand.Play();
+
+		}
+		private void OnAttackEnd()
         {
             attackCollider.enabled = false;
         }
